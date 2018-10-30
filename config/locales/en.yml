@@ -30,4 +30,5 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  failure:
+    user_not_exist: "user not exist or credentials are invalid"
