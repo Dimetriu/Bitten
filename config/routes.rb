@@ -1,3 +1,15 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  defaults format: :json do
+    namespace :api do
+      namespace :v1 do
+
+        namespace :users do
+          post 'login', to: 'authentication#login'
+          post 'sign_up', to: 'authentication#sign_up'
+        end
+
+      end
+    end
+  end
 end
