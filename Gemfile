@@ -20,7 +20,6 @@ gem 'jwt'
 gem 'valid_email2'
 
 gem 'simple_command'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
