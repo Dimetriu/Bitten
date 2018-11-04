@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_093307) do
+ActiveRecord::Schema.define(version: 2018_11_04_140500) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "urls", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "body", default: "", null: false
+    t.string "shortened_body", default: "", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shortened_body"], name: "index_urls_on_shortened_body", unique: true
+    t.index ["user_id"], name: "index_urls_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "given_name", default: "", null: false
@@ -25,4 +37,5 @@ ActiveRecord::Schema.define(version: 2018_10_30_093307) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "urls", "users"
 end
