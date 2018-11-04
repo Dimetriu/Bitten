@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate_request!
+  # skip_before_action :authenticate_request!
 
   def login
     command = Api::V1::Auth::AuthenticateSubject.call(
