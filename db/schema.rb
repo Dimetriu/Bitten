@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2018_11_04_141524) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shortened_body"], name: "index_urls_on_shortened_body", unique: true
+    t.index ["body", "shortened_body"], name: "index_urls_on_body_and_shortened_body", unique: true
     t.index ["user_id"], name: "index_urls_on_user_id"
   end
 

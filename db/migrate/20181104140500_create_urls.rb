@@ -13,6 +13,6 @@ class CreateUrls < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :urls, [:shortened_body], unique: true, algorithm: :concurrently
+    add_index :urls, [:body, :shortened_body], unique: true, algorithm: :concurrently
   end
 end

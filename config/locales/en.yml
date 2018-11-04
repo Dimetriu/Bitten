@@ -38,3 +38,5 @@ en:
     user_not_exist: "user not exist or credentials are invalid"
     invalid_token:  "invalid token"
     missing_token:  "missing token"
+  url:
+    invalid_url: "invalid url"
