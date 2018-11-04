@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_04_140500) do
+ActiveRecord::Schema.define(version: 2018_11_04_141524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -37,5 +37,16 @@ ActiveRecord::Schema.define(version: 2018_11_04_140500) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "visits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "country", default: "", null: false
+    t.string "ipaddr", null: false
+    t.uuid "url_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country"], name: "index_visits_on_country"
+    t.index ["url_id"], name: "index_visits_on_url_id"
+  end
+
   add_foreign_key "urls", "users"
+  add_foreign_key "visits", "urls"
 end
