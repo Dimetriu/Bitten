@@ -30,5 +30,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  user:
+    already_exists: "user already exists"
+    already_signed_in: "already signed in"
+    cant_save_user: "can not save user"
   failure:
     user_not_exist: "user not exist or credentials are invalid"
+    invalid_token:  "invalid token"
+    missing_token:  "missing token"
