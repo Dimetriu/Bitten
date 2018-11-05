@@ -40,3 +40,5 @@ en:
     missing_token:  "missing token"
   url:
     invalid_url: "invalid url"
+  visit:
+    visit_invalid: "invalid data"

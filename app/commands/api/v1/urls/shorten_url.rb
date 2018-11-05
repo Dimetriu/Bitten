@@ -20,19 +20,20 @@ class Api::V1::Urls::ShortenUrl
   private
     attr_reader :owner, :body
 
-    def generate_short_body
-      (
-        ('A'..'z')
-        .to_a.keep_if { |i| /\w/.match(i) }.sample(3) + (1..3).collect { rand(9) }
-      )
-      .join
-    end
-
     def url
       url = Url.new(
               user_id: owner.id,
               body: body,
               shortened_body: generate_short_body
             )
+    end
+
+    def generate_short_body
+      (
+        ('A'..'z').to_a.keep_if { |i| /\w/.match(i) }.sample(3)
+        +
+        (1..3).collect { rand(9) }
+      )
+      .join
     end
 end
