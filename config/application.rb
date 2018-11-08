@@ -23,10 +23,12 @@ module Urlshortner
     config.load_defaults 5.2
 
     # Use Redis for caching
-    config.cache_store = :redis_cache_store, {
-      driver: :hiredis,
-      url: "redis://192.168.0.10:6379/0"
-    }
+    # config.cache_store = :redis_cache_store, {
+    #   driver: :hiredis,
+    #   url: "ENV[REDIS_URL_DEVELOPMENT]"
+    # }
+
+    config.active_job.queue_adapter = :sidekiq
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

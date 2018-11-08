@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# Use .env to store Environment Varaibles
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use postgresql as the database for Active Record
@@ -22,8 +24,10 @@ gem 'valid_email2'
 gem 'simple_command'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+# Use geocoder to detect the country where the request came from
 gem 'geocoder'
 gem 'countries', require: 'countries/global'
+gem 'sidekiq'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
