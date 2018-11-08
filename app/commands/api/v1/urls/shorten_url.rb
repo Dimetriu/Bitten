@@ -29,11 +29,9 @@ class Api::V1::Urls::ShortenUrl
     end
 
     def generate_short_body
-      (
-        ('A'..'z').to_a.keep_if { |i| /\w/.match(i) }.sample(3)
-        +
-        (1..3).collect { rand(9) }
-      )
-      .join
+      gen_str = ('A'..'z').to_a.keep_if { |i| /\w/.match(i) }.sample(3)
+      gen_num = (1..3).collect { rand(9) }
+
+      (gen_str + gen_num).join
     end
 end
