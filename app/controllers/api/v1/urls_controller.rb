@@ -1,4 +1,5 @@
 class Api::V1::UrlsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     urls = Url.select(:body, :shortened_body)
@@ -21,5 +22,10 @@ class Api::V1::UrlsController < ApplicationController
 
     render json: url
   end
+
+  private
+    def record_not_found
+      render json: { status: :not_found }
+    end
 
 end

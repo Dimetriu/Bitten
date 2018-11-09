@@ -12,7 +12,7 @@ class Api::V1::Urls::ShortenUrl
   end
 
   def call
-    return url.save if url.valid?
+    return owner.urls << url if url.valid?
 
     errors.add(:url, I18n.t('url.invalid_url'))
   end
@@ -21,6 +21,9 @@ class Api::V1::Urls::ShortenUrl
     attr_reader :owner, :body
 
     def url
+      url = owner.urls.find_by(body: body)
+      return url if url
+
       url = Url.new(
               user_id: owner.id,
               body: body,
