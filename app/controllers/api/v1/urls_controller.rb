@@ -25,7 +25,8 @@ class Api::V1::UrlsController < ApplicationController
 
   private
     def record_not_found
-      render json: { status: :not_found }
+      logger.warn I18n.t('record_not_found', params: params[:shortened_body])
+      render json: { shortened_body: params[:shortened_body], status: :not_found }
     end
 
 end

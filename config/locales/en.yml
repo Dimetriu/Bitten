@@ -30,6 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  record_not_found: "record with params %{params} not found..."
   user:
     already_exists: "user already exists"
     already_signed_in: "already signed in"
