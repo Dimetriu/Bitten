@@ -5,7 +5,7 @@ class CreateVisits < ActiveRecord::Migration[5.2]
     create_table :visits, id: :uuid do |t|
       t.string :country, default: "", null: false
       t.string :ipaddr,  degault: "", null: false
-      t.references :url, type: :uuid, foreign_key: true, index: { algorithm: :concurrently }
+      t.references :url, index: { algorithm: :concurrently }
 
       t.timestamps
     end

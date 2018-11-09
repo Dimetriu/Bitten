@@ -1,4 +1,6 @@
 class Url < ApplicationRecord
+  self.primary_key = :shortened_body
+
   belongs_to :user
   has_many   :visits
 

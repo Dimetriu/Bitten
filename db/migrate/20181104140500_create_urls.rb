@@ -5,7 +5,7 @@ class CreateUrls < ActiveRecord::Migration[5.2]
     enable_extension 'uuid-ossp'
     enable_extension 'pgcrypto'
 
-    create_table :urls, id: :uuid do |t|
+    create_table :urls, id: false do |t|
       t.string :body,           default: "", null: false
       t.string :shortened_body, default: "", null: false
       t.references :user, foreign_key: true, index: { algorithm: :concurrently }

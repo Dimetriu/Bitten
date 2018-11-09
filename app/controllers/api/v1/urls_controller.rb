@@ -1,7 +1,7 @@
 class Api::V1::UrlsController < ApplicationController
 
   def index
-    urls = Url.select(:id, :body, :shortened_body)
+    urls = Url.select(:body, :shortened_body)
 
     render json: urls
   end
@@ -17,7 +17,7 @@ class Api::V1::UrlsController < ApplicationController
   end
 
   def show
-    url = Url.find(params[:id])
+    url = Url.find(params[:shortened_body])
 
     render json: url
   end

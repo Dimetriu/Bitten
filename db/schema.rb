@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2018_11_04_141524) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "urls", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "urls", id: false, force: :cascade do |t|
     t.string "body", default: "", null: false
     t.string "shortened_body", default: "", null: false
     t.bigint "user_id"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2018_11_04_141524) do
   create_table "visits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "country", default: "", null: false
     t.string "ipaddr", null: false
-    t.uuid "url_id"
+    t.bigint "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country"], name: "index_visits_on_country"
@@ -48,5 +48,4 @@ ActiveRecord::Schema.define(version: 2018_11_04_141524) do
   end
 
   add_foreign_key "urls", "users"
-  add_foreign_key "visits", "urls"
 end
