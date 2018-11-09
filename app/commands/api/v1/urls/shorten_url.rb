@@ -1,14 +1,14 @@
 class Api::V1::Urls::ShortenUrl
   prepend SimpleCommand
 
+  def self.normalize(body)
+    uri = URI(body)
+    uri.scheme.nil? ? uri = URI('http://' << uri.to_s).to_s : uri
+  end
+
   def initialize(owner, body)
     @owner = owner
     @body  = Api::V1::Urls::ShortenUrl.normalize(body)
-  end
-
-  def self.normalize(body)
-    uri = URI(body)
-    uri = URI('http://' << uri.to_s).to_s if uri.scheme.nil?
   end
 
   def call
@@ -29,9 +29,14 @@ class Api::V1::Urls::ShortenUrl
     end
 
     def generate_short_body
-      gen_str = ('A'..'z').to_a.keep_if { |i| /\w/.match(i) }.sample(3)
-      gen_num = (1..3).collect { rand(9) }
+      (1..3)
+      .collect { rand(9) }
+      .map { |i| i.to_s << ('a'..'z').to_a.sample(2).join.capitalize }
+      .join
 
-      (gen_str + gen_num).join
+      # gen_str = ('A'..'z').to_a.keep_if { |i| /\w/.match(i) }.sample(3)
+      # gen_num = (1..3).collect { rand(9) }
+
+      # (gen_str + gen_num).join
     end
 end
