@@ -40,11 +40,10 @@ ActiveRecord::Schema.define(version: 2018_11_04_141524) do
   create_table "visits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "country", default: "", null: false
     t.string "ipaddr", null: false
-    t.bigint "url_id"
+    t.string "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["country"], name: "index_visits_on_country"
-    t.index ["url_id"], name: "index_visits_on_url_id"
+    t.index ["country", "url_id"], name: "index_visits_on_country_and_url_id"
   end
 
   add_foreign_key "urls", "users"

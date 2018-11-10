@@ -1,9 +1,9 @@
-class Api::V1::Visits::ProcessVisit
+class Api::V1::Urls::BuildVisit
   prepend SimpleCommand
 
   def initialize(owner, ipaddr)
     @owner  = owner
-    @ipaddr = Api::V1::Visits::ProcessVisit.normalize(ipaddr)
+    @ipaddr = Api::V1::Urls::BuildVisit.normalize(ipaddr)
   end
 
 

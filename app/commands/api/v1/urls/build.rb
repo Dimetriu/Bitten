@@ -1,4 +1,4 @@
-class Api::V1::Urls::ShortenUrl
+class Api::V1::Urls::Build
   prepend SimpleCommand
 
   def self.normalize(body)
@@ -8,7 +8,7 @@ class Api::V1::Urls::ShortenUrl
 
   def initialize(owner, body)
     @owner = owner
-    @body  = Api::V1::Urls::ShortenUrl.normalize(body)
+    @body  = Api::V1::Urls::Build.normalize(body)
   end
 
   def call
