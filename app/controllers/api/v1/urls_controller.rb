@@ -12,23 +12,29 @@ class Api::V1::UrlsController < ApplicationController
     command = Api::V1::Urls::Build.call(current_user, params[:body])
 
     if command.success?
-      render json: { url: command.result }
+      render json: { url: command.result, status: :created }
     else
-      render json: { error: command.errors }, status: :unprocessable_entity
+      render json: { error: command.errors , status: :unprocessable_entity }
     end
   end
 
   def show
     url = Url.find(params[:shortened_body])
+    command = Api::V1::Urls::BuildVisit.call(url, request.remote_ip)
 
-    render json: url
-    # redirect_to url.body
+    if command.success?
+      logger.info command.result
+    else
+      logger.warn command.errors
+    end
+
+    redirect_to url.body
   end
 
   private
     def record_not_found
       logger.warn I18n.t('record_not_found', reason: params[:shortened_body])
-      render json: { shortened_body: params[:shortened_body] }, status: :not_found
+      render json: { shortened_body: params[:shortened_body] , status: 404 }
     end
 
 end

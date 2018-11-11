@@ -8,7 +8,8 @@ class Api::V1::Urls::BuildVisit
 
 
   def call
-    return visit.save if visit.valid?
+    owner.visits << visit if visit.valid?
+    return visit
 
     errors.add(:visit, I18n.t('visit.visit_invalid'))
   end
